@@ -1,0 +1,7 @@
+{
+  "name": "reload_calendar",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
