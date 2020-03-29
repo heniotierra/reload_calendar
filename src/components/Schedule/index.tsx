@@ -20,7 +20,7 @@ const Schedule: React.FC<ContainerProps> = ({
       <strong>Hi, {name}! Below is your schedule:</strong>
       <IonList>
         {
-          schedule.map((appointment, i) => {
+          schedule.length? schedule.map((appointment, i) => {
             const startDate = new Date(appointment.startDate);
             const endDate = new Date(appointment.endDate);
             return (
@@ -29,7 +29,11 @@ const Schedule: React.FC<ContainerProps> = ({
                 <IonLabel>End: {formatDate(getYear(endDate),getMonth(endDate),getDate(endDate))}</IonLabel>
               </IonItem>
             );
-          })
+          }) : (
+            <IonItem key={`a1`} className="schedule-dates">
+              <IonLabel>You have no scheduled appointments</IonLabel>
+            </IonItem>
+          )
         }
       </IonList>
     </div>
