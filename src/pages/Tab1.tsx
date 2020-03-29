@@ -10,7 +10,8 @@ import {
   IonList,
   IonItem,
   IonThumbnail,
-  IonLabel
+  IonLabel,
+  IonButton
 } from '@ionic/react';
 import Schedule from '../components/Schedule';
 import './Tab1.css';
@@ -48,6 +49,9 @@ const Tab1: React.FC = (_, ref) => {
           </IonList>
           <Calendar/>
         </IonModal>
+        <IonButton class="open-calendar-modal" onClick={() => setShowModal(true)}>
+          Open Calendar
+        </IonButton>
       </IonContent>
     </IonPage>
   );

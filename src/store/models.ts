@@ -15,4 +15,4 @@ export const schedule = {
       return [...state, ...[payload]];
     },
 	},
-}
+};

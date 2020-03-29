@@ -7,7 +7,8 @@ import {
   IonThumbnail,
   IonList,
   IonItem,
-  IonLabel
+  IonLabel,
+  IonAlert
 } from '@ionic/react';
 import { connect } from 'react-redux';
 import { ScheduleAppointment } from '../../store/models';
@@ -35,6 +36,7 @@ const Calendar: React.FC<ContainerProps> = ({
   const [lastDayInRange, setLastDayInRange] = useState<number>(0);
   const [selectedDays, setSelectedDays] = useState<number[]>([]);
   const [selectedDateRange, setSelectedDateRange] = useState<number[]>([]);
+  const [showAlert, setShowAlert] = useState<boolean>(false)
 
   const seePrevMonth = () => {
     resetSelection();
@@ -197,13 +199,24 @@ const Calendar: React.FC<ContainerProps> = ({
         })
       }
       <button className="apply-btn" onClick={
-        () => addScheduleAppointment({
-          startDate: new Date(currentYear, currentMonth, firstDayInRange, 0, 0, 0, 0),
-          endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0)
-        })
+        () => {
+          addScheduleAppointment({
+            startDate: new Date(currentYear, currentMonth, firstDayInRange, 0, 0, 0, 0),
+            endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0)
+          });
+          resetSelection();
+          setShowAlert(true);
+        }
       }>
         Apply
       </button>
+      <IonAlert
+        isOpen={showAlert}
+        onDidDismiss={() => setShowAlert(false)}
+        header={'Schedule appointment'}
+        message={'Your appointment has been scheduled successfully!'}
+        buttons={['OK']}
+      />
     </div>
   );
 };

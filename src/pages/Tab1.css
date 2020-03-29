@@ -3,7 +3,7 @@ ion-content ion-toolbar {
 }
 
 .calendar-modal-title {
-  font-family: 'Roboto';
+  font-family: 'Roboto' !important;
   font-weight: 600;
   letter-spacing: 2px;
 }
@@ -13,4 +13,10 @@ ion-content ion-toolbar {
   height: 40px;
   padding-top: 15px;
   cursor: pointer;
+}
+
+.open-calendar-modal {
+  font-family: 'Roboto' !important;
+  font-weight: 600;
+  color: white;
 }

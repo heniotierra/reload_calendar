@@ -30,7 +30,7 @@ const Schedule: React.FC<ContainerProps> = ({
               </IonItem>
             );
           }) : (
-            <IonItem key={`a1`} className="schedule-dates">
+            <IonItem key="a1" className="schedule-dates">
               <IonLabel>You have no scheduled appointments</IonLabel>
             </IonItem>
           )
