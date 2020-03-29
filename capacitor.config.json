@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.debug",
-  "appName": "reload_calendar_debug",
+  "appId": "io.ionic.starter",
+  "appName": "reload_calendar",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
