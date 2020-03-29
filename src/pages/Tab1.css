@@ -1,3 +1,15 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+
+.calendar-modal-title {
+  font-family: 'Roboto';
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.close-calendar-btn {
+  width: 40px;
+  height: 40px;
+  padding-top: 15px;
+}
