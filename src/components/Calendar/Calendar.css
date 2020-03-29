@@ -37,6 +37,7 @@
 .monthday-col div {
   font-family: 'Roboto' !important;
   height: 20px;
+  cursor: pointer;
 }
 
 .monthdays-row {
@@ -90,6 +91,7 @@
   width: 40px;
   height: 40px;
   padding-top: 15px;
+  cursor: pointer;
 }
 
 .next-calendar-btn {
