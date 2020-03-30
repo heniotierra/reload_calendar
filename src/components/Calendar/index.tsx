@@ -167,7 +167,7 @@ const Calendar: React.FC<ContainerProps> = ({
                       `}
                       onClick={() => selectDate(day)}>
                       <div>
-                        {day}
+                        <label>{day}</label>
                       </div>
                     </IonCol>
                   );
@@ -188,7 +188,7 @@ const Calendar: React.FC<ContainerProps> = ({
                     `}
                     onClick={() => selectDate(day)}>
                     <div>
-                      {day}
+                      <label>{day}</label>
                     </div>
                   </IonCol>
                 );
@@ -202,7 +202,7 @@ const Calendar: React.FC<ContainerProps> = ({
         () => {
           addScheduleAppointment({
             startDate: new Date(currentYear, currentMonth, firstDayInRange, 0, 0, 0, 0),
-            endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0)
+            endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0),
           });
           resetSelection();
           setShowAlert(true);

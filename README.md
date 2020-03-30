@@ -3,7 +3,7 @@ Project for Reload company
 INSTRUCTIONS 
 ============
 
-Installation
+Installation:
 ------------
 
     $ npm install -g @ionic/cli native-run cordova-res

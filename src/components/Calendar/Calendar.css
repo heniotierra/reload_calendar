@@ -35,9 +35,18 @@
 }
 
 .monthday-col div {
-  font-family: 'Roboto' !important;
   height: 20px;
   cursor: pointer;
+}
+
+.monthday-col label {
+  font-family: 'Roboto' !important;
+  cursor: pointer;
+}
+
+.monthday-col label:hover {
+  border-radius: 20px;
+  background-color: skyblue;
 }
 
 .monthdays-row {
