@@ -1,9 +1,0 @@
-{
-  "appId": "io.ionic.starter",
-  "appName": "reload_calendar",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "cordova": {},
-  "linuxAndroidStudioPath": "/opt/android-studio/bin/studio.sh"
-}
