@@ -105,3 +105,8 @@
   cursor: pointer;
 }
 
+.success-msg {
+  margin-top: 10px;
+  min-height: 20px;
+  font-weight: 800;
+}

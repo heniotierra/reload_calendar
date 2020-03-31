@@ -204,7 +204,7 @@ const Calendar: React.FC<ContainerProps> = ({
       }>
         Apply
       </button>
-      <div>
+      <div className="success-msg">
         {showSuccessMsg ? "Appointment scheduled successfully!" : ""}
       </div>
     </div>
