@@ -3,15 +3,13 @@ import './index.css';
 
 interface ContainerProps {
   day: number,
-  highlighted: boolean,
 }
 
 const DayCell: React.FC<ContainerProps> = ({
   day,
-  highlighted,
 }) => {
   return (
-    <div className={`day-cell ${highlighted? 'highlighted-cell' : ''}`}>
+    <div className={`day-cell`}>
       {day}
     </div>
   )

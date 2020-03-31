@@ -27,7 +27,7 @@ function App() {
           <Modal isOpen={modalShow}>
             <div className="o-flex-grid w-100" {...handlers}>
               <div className="o-flex-grid--item w-5">
-                <img className="close-calendar-btn" src={close} onClick={() => setModalShow(false)} />
+                <img className="close-calendar-btn" src={close} onClick={() => setModalShow(false)} alt=""/>
               </div>
               <div className="o-flex-grid--item">
                 <label className="calendar-title">Calendar</label>

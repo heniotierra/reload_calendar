@@ -105,11 +105,11 @@ const Calendar: React.FC<ContainerProps> = ({
     <div className="container">
       <div className="o-flex-grid">
           <div className="o-flex-grid--item" onClick={seePrevMonth}>
-            <img className="back-calendar-btn" src={backArrow}/>
+            <img className="back-calendar-btn" src={backArrow} alt=""/>
           </div>
           <div className="o-flex-grid--item current-date">{formatYearMonth(currentYear, currentMonth)}</div>
           <div className="o-flex-grid--item" onClick={seeNextMonth} >
-            <img className="next-calendar-btn" src={nextArrow}/>
+            <img className="next-calendar-btn" src={nextArrow} alt=""/>
           </div>
       </div>
       <div className="o-flex-grid weekdays-names" key="r0">
@@ -159,7 +159,7 @@ const Calendar: React.FC<ContainerProps> = ({
                       `}
                       onClick={() => selectDate(day)}>
                       <div>
-                        <DayCell day={day} highlighted={selectedDates.includes(day)} />
+                        <DayCell day={day}/>
                       </div>
                     </div>
                   );
@@ -181,7 +181,7 @@ const Calendar: React.FC<ContainerProps> = ({
                     `}
                     onClick={() => selectDate(day)}>
                     <div>
-                      <DayCell day={day} highlighted={selectedDates.includes(day)} />
+                      <DayCell day={day}/>
                     </div>
                   </div>
                 );

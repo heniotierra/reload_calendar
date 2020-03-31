@@ -1,4 +1,4 @@
-import { format, startOfMonth, endOfMonth, getDay, getDate, getDaysInMonth } from 'date-fns'; 
+import { format, startOfMonth, endOfMonth, getDay, getDate } from 'date-fns'; 
 
 export const formatYearMonth = (Y: number, M: number) => format(new Date(Y, M, 1, 0, 0, 0, 0), 'MMM yyyy');
 
