@@ -12,6 +12,7 @@ import { generateNumberSequence } from '../../utils/generators';
 import './index.css';
 import backArrow from '../../assets/arrow-back.svg';
 import nextArrow from '../../assets/arrow-next.svg';
+import DayCell from '../DayCell';
 
 interface ContainerProps {
   addScheduleAppointment(scheduleAppointment: ScheduleAppointment): void
@@ -62,6 +63,7 @@ const Calendar: React.FC<ContainerProps> = ({
       return;
     } else {
       selectedDays.push(selectedDay);
+      setSelectedDays([...selectedDays]);
     }
     selectDateRange();
   };
@@ -157,7 +159,7 @@ const Calendar: React.FC<ContainerProps> = ({
                       `}
                       onClick={() => selectDate(day)}>
                       <div>
-                        <label>{day}</label>
+                        <DayCell day={day} highlighted={selectedDays.includes(day)} />
                       </div>
                     </div>
                   );
@@ -179,7 +181,7 @@ const Calendar: React.FC<ContainerProps> = ({
                     `}
                     onClick={() => selectDate(day)}>
                     <div>
-                      <label>{day}</label>
+                      <DayCell day={day} highlighted={selectedDays.includes(day)} />
                     </div>
                   </div>
                 );

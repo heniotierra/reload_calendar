@@ -1,0 +1,13 @@
+.day-cell {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 30px;
+  width: 30px;
+  height: 30px !important;
+  border-radius: 20px;
+}
+
+.highlighted-cell {
+  background-color: aqua;
+}
