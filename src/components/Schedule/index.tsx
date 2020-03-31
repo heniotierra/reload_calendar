@@ -17,7 +17,7 @@ const Schedule: React.FC<ContainerProps> = ({
   return (
     <div className="container">
       <strong>Hi, {name}! Below is your schedule:</strong>
-      <div className="o-flex-grid w-60">
+      <div className="o-flex-grid w-80">
         <div className="o-flex-grid--item">
           {
             schedule.length? schedule.map((appointment, i) => {

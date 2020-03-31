@@ -27,8 +27,9 @@ const Calendar: React.FC<ContainerProps> = ({
   const [lastDayInMonth, setLastDayInMonth] = useState<number>(0);
   const [firstDayInRange, setFirstDayInRange] = useState<number>(0);
   const [lastDayInRange, setLastDayInRange] = useState<number>(0);
-  const [selectedDays, setSelectedDays] = useState<number[]>([]);
+  const [selectedDates, setSelectedDates] = useState<number[]>([]);
   const [selectedDateRange, setSelectedDateRange] = useState<number[]>([]);
+  const [showSuccessMsg, setShowSuccessMsg] = useState<boolean>(false);
 
   const seePrevMonth = () => {
     resetSelection();
@@ -51,19 +52,19 @@ const Calendar: React.FC<ContainerProps> = ({
   };
 
   const resetSelection = () => {
-    setSelectedDays([]);
+    setSelectedDates([]);
     setSelectedDateRange([]);
     setFirstDayInRange(0);
     setLastDayInRange(0);
   };
 
-  const selectDate = (selectedDay: number) => {
-    if (selectedDays.length >= 2){
+  const selectDate = (selectedDate: number) => {
+    if (selectedDates.length >= 2){
       resetSelection();
       return;
     } else {
-      selectedDays.push(selectedDay);
-      setSelectedDays([...selectedDays]);
+      selectedDates.push(selectedDate);
+      setSelectedDates([...selectedDates]);
     }
     selectDateRange();
   };
@@ -71,12 +72,11 @@ const Calendar: React.FC<ContainerProps> = ({
   const cellCh = 'c';
   
   const selectDateRange = () => {
-    if (selectedDays.length === 2) {
-      let toSort: number[] = [...selectedDays];
+    if (selectedDates.length === 2) {
+      let toSort: number[] = [...selectedDates];
       toSort = toSort.sort((a, b) => a - b);
       let left = toSort[0];
-      while (left + 1 < toSort[1]) {
-        ++left;
+      while (++left < toSort[1]) {
         if (![0,6].includes(getDayOfWeek(currentYear, currentMonth, left))) {
           toSort.push(left);
         }
@@ -97,18 +97,18 @@ const Calendar: React.FC<ContainerProps> = ({
     setFirstDayInMonth(getStartOfMonth(currentYear, currentMonth));
     setLastDayInMonth(getEndOfMonth(currentYear, currentMonth));
   }, [currentYear, currentMonth]);
-  useLayoutEffect(() => {}, [selectedDateRange]);
+  useLayoutEffect(() => {}, [selectedDateRange, showSuccessMsg]);
 
   const cellDays = selectedDateRange.map((day) => `${cellCh}${day}`);
   
   return (
     <div className="container">
       <div className="o-flex-grid">
-          <div className="o-flex-grid--item flex-container" onClick={seePrevMonth}>
+          <div className="o-flex-grid--item" onClick={seePrevMonth}>
             <img className="back-calendar-btn" src={backArrow}/>
           </div>
           <div className="o-flex-grid--item current-date">{formatYearMonth(currentYear, currentMonth)}</div>
-          <div className="o-flex-grid--item flex-container" onClick={seeNextMonth} >
+          <div className="o-flex-grid--item" onClick={seeNextMonth} >
             <img className="next-calendar-btn" src={nextArrow}/>
           </div>
       </div>
@@ -159,7 +159,7 @@ const Calendar: React.FC<ContainerProps> = ({
                       `}
                       onClick={() => selectDate(day)}>
                       <div>
-                        <DayCell day={day} highlighted={selectedDays.includes(day)} />
+                        <DayCell day={day} highlighted={selectedDates.includes(day)} />
                       </div>
                     </div>
                   );
@@ -181,7 +181,7 @@ const Calendar: React.FC<ContainerProps> = ({
                     `}
                     onClick={() => selectDate(day)}>
                     <div>
-                      <DayCell day={day} highlighted={selectedDays.includes(day)} />
+                      <DayCell day={day} highlighted={selectedDates.includes(day)} />
                     </div>
                   </div>
                 );
@@ -193,16 +193,20 @@ const Calendar: React.FC<ContainerProps> = ({
       }
       <button className="apply-btn" onClick={
         () => {
+          setTimeout(() => setShowSuccessMsg(false), 3000);
+          setShowSuccessMsg(true);
+          resetSelection();
           addScheduleAppointment({
             startDate: new Date(currentYear, currentMonth, firstDayInRange, 0, 0, 0, 0),
             endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0),
           });
-          resetSelection();
         }
       }>
         Apply
       </button>
-
+      <div>
+        {showSuccessMsg ? "Appointment scheduled successfully!" : ""}
+      </div>
     </div>
   );
 };

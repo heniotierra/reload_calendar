@@ -10,13 +10,11 @@ const Modal: React.FC<ContainerProps> = ({
   children,
 }) => {
   return (
-    <>
-      <div className={`modal ${isOpen ? 'modal-open' : ''}`}>
-        <div className="modal__inner">
-          {children}
-        </div>
+    <div className={`modal ${isOpen ? 'modal-open' : ''}`}>
+      <div className="modal__inner">
+        {children}
       </div>
-    </>
+    </div>
   );
 };
 
