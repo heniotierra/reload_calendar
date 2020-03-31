@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+} 
+    
+.o-flex-grid {
+    display: flex;
+    flex-shrink: 0;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+.o-flex-grid--item {
+    border-radius: 5px;
+    width: 100%;
+    
+    &:first-child:nth-last-child(1)
+    &:first-child:nth-last-child(1) ~ div {
+        width: 100%;
+    }
+
+    &:first-child:nth-last-child(2)
+    &:first-child:nth-last-child(2) ~ div {
+        width: 50%;
+    }
+
+    &:first-child:nth-last-child(3)
+    &:first-child:nth-last-child(3) ~ div {
+        width: 33%;
+    }
+        
+    &:first-child:nth-last-child(4)
+    &:first-child:nth-last-child(4) ~ div {
+        width: 25%;
+    }
+        
+    &:first-child:nth-last-child(5) 
+    &:first-child:nth-last-child(5) ~ div {
+        width: 20%;
+    }
+
+    &:first-child:nth-last-child(6)
+    &:first-child:nth-last-child(6) ~ div {
+        width: 16%;
+    }
+
+    &:first-child:nth-last-child(7)
+    &:first-child:nth-last-child(7) ~ div {
+        width: 14%;
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-80 {
+    width: 80%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-20 {
+    width: 20%;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.w-5 {
+    width: 5%;
+}
