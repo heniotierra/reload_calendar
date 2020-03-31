@@ -1,25 +1,17 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { getMonth, getYear } from 'date-fns'; 
-import {
-  IonRow,
-  IonCol,
-  IonImg,
-  IonThumbnail,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonAlert
-} from '@ionic/react';
 import { connect } from 'react-redux';
 import { ScheduleAppointment } from '../../store/models';
 import {
-  getEndOfMonth,
   getDayOfWeek,
+  getEndOfMonth,
   getStartOfMonth,
   formatYearMonth
 } from '../../utils/date';
 import { generateNumberSequence } from '../../utils/generators';
-import './Calendar.css';
+import './index.css';
+import backArrow from '../../assets/arrow-back.svg';
+import nextArrow from '../../assets/arrow-next.svg';
 
 interface ContainerProps {
   addScheduleAppointment(scheduleAppointment: ScheduleAppointment): void
@@ -36,7 +28,6 @@ const Calendar: React.FC<ContainerProps> = ({
   const [lastDayInRange, setLastDayInRange] = useState<number>(0);
   const [selectedDays, setSelectedDays] = useState<number[]>([]);
   const [selectedDateRange, setSelectedDateRange] = useState<number[]>([]);
-  const [showAlert, setShowAlert] = useState<boolean>(false)
 
   const seePrevMonth = () => {
     resetSelection();
@@ -110,56 +101,55 @@ const Calendar: React.FC<ContainerProps> = ({
   
   return (
     <div className="container">
-      <IonList>
-        <IonItem>
-          <IonThumbnail slot="start" onClick={seePrevMonth} >
-            <IonImg className="prev-calendar-btn" src="assets/arrow-back.svg"/>
-          </IonThumbnail>
-          <IonLabel className="current-date">{formatYearMonth(currentYear, currentMonth)}</IonLabel>
-          <IonThumbnail slot="end" onClick={seeNextMonth} >
-            <IonImg className="next-calendar-btn" src="assets/arrow-next.svg"/>
-          </IonThumbnail>
-        </IonItem>
-      </IonList>
-      <IonRow className="weekdays-names" key="r0">
-        <IonCol offset-7 key="sun">
+      <div className="o-flex-grid">
+          <div className="o-flex-grid--item flex-container" onClick={seePrevMonth}>
+            <img className="back-calendar-btn" src={backArrow}/>
+          </div>
+          <div className="o-flex-grid--item current-date">{formatYearMonth(currentYear, currentMonth)}</div>
+          <div className="o-flex-grid--item flex-container" onClick={seeNextMonth} >
+            <img className="next-calendar-btn" src={nextArrow}/>
+          </div>
+      </div>
+      <div className="o-flex-grid weekdays-names" key="r0">
+        <div className="o-flex-grid--item" key="sun">
           <div>S</div>
-        </IonCol>
-        <IonCol key="mon">
+        </div>
+        <div className="o-flex-grid--item" key="mon">
           <div>M</div>
-        </IonCol>
-        <IonCol key="tur">
+        </div>
+        <div className="o-flex-grid--item" key="tur">
           <div>T</div>
-        </IonCol>
-        <IonCol key="wed">
+        </div>
+        <div className="o-flex-grid--item" key="wed">
           <div>W</div>
-        </IonCol>
-        <IonCol key="thu">
+        </div>
+        <div className="o-flex-grid--item" key="thu">
           <div>T</div>
-        </IonCol>
-        <IonCol key="fri">
+        </div>
+        <div className="o-flex-grid--item" key="fri">
           <div>F</div>
-        </IonCol>
-        <IonCol key="sat">
+        </div>
+        <div className="o-flex-grid--item" key="sat">
           <div>S</div>
-        </IonCol>
-      </IonRow>
+        </div>
+      </div>
       {
         generateNumberSequence(6).map((week) => {
           return (
-            <IonRow className="monthdays-row" key={`r${week+1}`}>
+            <div className="o-flex-grid monthdays-row" key={`r${week+1}`}>
             {
               generateNumberSequence(7).map((iteration) => {
                 if (week === 0) {
                   const day = iteration + 1 - firstDayInMonth;
                   if (iteration < firstDayInMonth) {
-                    return <IonCol key={`c${day}`}></IonCol>;
+                    return <div className="o-flex-grid--item" key={`c${day}`}></div>;
                   }
                   return (
-                    <IonCol
+                    <div
                       id={`${cellCh}${day}`}
                       key={`${cellCh}${day}`}
                       className={`
+                        o-flex-grid--item
                         monthday-col
                         ${cellDays.includes(`${cellCh}${day}`)? ' selected-date ' : ' '}
                         ${cellDays.length && `${cellCh}${firstDayInRange}` === `${cellCh}${day}` ? ' f-selected-date ' : ' '}
@@ -169,18 +159,19 @@ const Calendar: React.FC<ContainerProps> = ({
                       <div>
                         <label>{day}</label>
                       </div>
-                    </IonCol>
+                    </div>
                   );
                 }
                 const day = (week * 7) + iteration + 1 - firstDayInMonth;
                 if (day > lastDayInMonth) {
-                  return <IonCol key={`${cellCh}${day}`}></IonCol>;
+                  return <div className="o-flex-grid--item" key={`${cellCh}${day}`}></div>;
                 }
                 return (
-                  <IonCol
+                  <div
                     id={`${cellCh}${day}`}
                     key={`${cellCh}${day}`}
                     className={`
+                      o-flex-grid--item
                       monthday-col
                       ${cellDays.includes(`${cellCh}${day}`)? ' selected-date ' : ' '}
                       ${cellDays.length && `${cellCh}${firstDayInRange}` === `${cellCh}${day}` ? ' f-selected-date ' : ' '}
@@ -190,11 +181,11 @@ const Calendar: React.FC<ContainerProps> = ({
                     <div>
                       <label>{day}</label>
                     </div>
-                  </IonCol>
+                  </div>
                 );
               })
             }
-            </IonRow>
+            </div>
           );
         })
       }
@@ -205,18 +196,11 @@ const Calendar: React.FC<ContainerProps> = ({
             endDate: new Date(currentYear, currentMonth, lastDayInRange, 0, 0, 0, 0),
           });
           resetSelection();
-          setShowAlert(true);
         }
       }>
         Apply
       </button>
-      <IonAlert
-        isOpen={showAlert}
-        onDidDismiss={() => setShowAlert(false)}
-        header={'Schedule appointment'}
-        message={'Your appointment has been scheduled successfully!'}
-        buttons={['OK']}
-      />
+
     </div>
   );
 };

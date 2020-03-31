@@ -1,58 +1,44 @@
-import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import {
-  IonApp,
-  IonIcon,
-  IonLabel,
-  IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs
-} from '@ionic/react';
+import React, { useState } from 'react';
+import './flexbox.css';
+import Modal from './components/Modal';
+import Calendar from './components/Calendar';
 import { Provider } from 'react-redux';
-import { IonReactRouter } from '@ionic/react-router';
-import { triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css';
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
-import '@ionic/react/css/text-alignment.css';
-import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-import './App.css';
 import store from './store';
+import close from './assets/close.svg';
+import Schedule from './components/Schedule';
+import { useSwipeable } from 'react-swipeable';
+import './App.css';
 
-/* Theme variables */
-import './theme/variables.css';
-
-const App: React.FC = () => (
-  <Provider store={store}>
-	  <IonApp>
-      <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path="/tab1" component={Tab1} exact={true} />
-            <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
-          </IonRouterOutlet>
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="tab1" href="/tab1">
-              <IonIcon icon={triangle} />
-              <IonLabel>Schedule</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
-      </IonReactRouter>
-    </IonApp>
-  </Provider>
-);
+function App() {
+  const [modalShow, setModalShow] = useState<boolean>(false);
+  const handlers = useSwipeable({ onSwiped: () => setModalShow(false) });
+  
+  return (
+    <Provider store={store}>
+      <div className="app">
+        <header className="app-header">
+          <div className="app-header-title">Schedule</div>
+        </header>
+        <div className="shedule-content">
+          <button className="btn-blue" onClick={() => setModalShow(true)}>
+            Open Calendar
+          </button>
+          <Schedule name="Olef" />
+          <Modal isOpen={modalShow}>
+            <div className="o-flex-grid w-100" {...handlers}>
+              <div className="o-flex-grid--item w-5">
+                <img className="close-calendar-btn" src={close} onClick={() => setModalShow(false)} />
+              </div>
+              <div className="o-flex-grid--item">
+                <label className="calendar-title">Calendar</label>
+              </div>
+            </div>
+            <Calendar />
+          </Modal>
+        </div>
+      </div>
+    </Provider>
+  );
+}
 
 export default App;
