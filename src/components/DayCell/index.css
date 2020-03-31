@@ -8,6 +8,6 @@
   border-radius: 20px;
 }
 
-.highlighted-cell {
+.day-cell:hover {
   background-color: aqua;
 }
