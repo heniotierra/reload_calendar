@@ -141,31 +141,8 @@ const Calendar: React.FC<ContainerProps> = ({
             <div className="o-flex-grid monthdays-row" key={`r${week+1}`}>
             {
               generateNumberSequence(7).map((iteration) => {
-                if (week === 0) {
-                  const day = iteration + 1 - firstDayInMonth;
-                  if (iteration < firstDayInMonth) {
-                    return <div className="o-flex-grid--item" key={`c${day}`}></div>;
-                  }
-                  return (
-                    <div
-                      id={`${cellCh}${day}`}
-                      key={`${cellCh}${day}`}
-                      className={`
-                        o-flex-grid--item
-                        monthday-col
-                        ${cellDays.includes(`${cellCh}${day}`)? ' selected-date ' : ' '}
-                        ${cellDays.length && `${cellCh}${firstDayInRange}` === `${cellCh}${day}` ? ' f-selected-date ' : ' '}
-                        ${cellDays.length && `${cellCh}${lastDayInRange}` === `${cellCh}${day}` ? 'l-selected-date' : ''}
-                      `}
-                      onClick={() => selectDate(day)}>
-                      <div>
-                        <DayCell day={day}/>
-                      </div>
-                    </div>
-                  );
-                }
                 const day = (week * 7) + iteration + 1 - firstDayInMonth;
-                if (day > lastDayInMonth) {
+                if ((week === 0 && iteration < firstDayInMonth) || day > lastDayInMonth) {
                   return <div className="o-flex-grid--item" key={`${cellCh}${day}`}></div>;
                 }
                 return (
